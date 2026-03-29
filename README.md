@@ -26,6 +26,22 @@ L'objectif principal est de gérer des clients, des comptes et de sécuriser des
 * **Historique** : Consultation globale ou détaillée par compte de toutes les transactions.
 
 ---
+## Structure du projet
+PROJET_JAV/
+├── dao/
+│   ├── ClientDAO.java 
+│   ├── CompteDAO.java 
+│   └── OperationDAO.java 
+├── database/ 
+│   └── Database.java
+├── model/
+│   ├── Client.java 
+│   ├── Compte.java 
+│   └── Operation.java 
+├── service/ 
+│   └── MobileMoneyService.java
+└── ui/ 
+    └── App.java 
 
 ## Spécifications Techniques
 * **Langage** : Java.
