@@ -13,5 +13,17 @@ CREATE TABLE COMPTE (
     solde DOUBLE DEFAULT 0.0,
     client_id INT NOT NULL,
     CONSTRAINT fk_client FOREIGN KEY (client_id) REFERENCES CLIENT(id) ON DELETE CASCADE
+);
+
+CREATE TABLE OPERATIONS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type_operation ENUM('DEPOT', 'RETRAIT', 'TRANSFERT', 'PAIEMENT') NOT NULL,
+    montant DOUBLE NOT NULL,
+    date_operation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    compte_source INT,
+    compte_destination INT,
+    marchand VARCHAR(50),
+    CONSTRAINT fk_compte_source FOREIGN KEY (compte_source) REFERENCES COMPTE(id),
+    CONSTRAINT fk_compte_dest FOREIGN KEY (compte_destination) REFERENCES COMPTE(id)
 )
 
