@@ -27,7 +27,7 @@ L'objectif principal est de gérer des clients, des comptes et de sécuriser des
 
 ---
 ## Structure du projet
-PROJET_JAV/
+PROJET_JAVA/
 ├── dao/
 │   ├── ClientDAO.java 
 │   ├── CompteDAO.java 

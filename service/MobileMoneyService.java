@@ -97,4 +97,25 @@ public class MobileMoneyService {
         }
         return false;
     }
+
+    public List<Client> searchClients(String keyword) {
+        return clientDAO.searchClients(keyword);
+    }
+
+    public Double getBalance(String numeroCompte) {
+        Compte compte = compteDAO.getCompteByNumero(numeroCompte);
+        return (compte != null) ? compte.getSolde() : null;
+    }
+
+    public List<Operation> getGlobalHistory() {
+        return operationDAO.getAllOperations();
+    }
+
+    public List<Operation> getAccountHistory(String numeroCompte) {
+        Compte compte = compteDAO.getCompteByNumero(numeroCompte);
+        if (compte != null) {
+            return operationDAO.getHistoryByCompte(compte.getId());
+        }
+        return null;
+    }
 }
