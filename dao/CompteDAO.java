@@ -3,8 +3,6 @@ package dao;
 import database.Database;
 import model.Compte;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CompteDAO {
     public void addCompte(Compte compte) {

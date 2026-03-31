@@ -59,4 +59,27 @@ public class OperationDAO {
         }
         return operations;
     }
+
+    public List<Operation> getAllOperations() {
+        List<Operation> operations = new ArrayList<>();
+        String sql = "SELECT * FROM OPERATIONS ORDER BY date_operation DESC";
+        try (Connection conn = Database.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                operations.add(new Operation(
+                    rs.getInt("id"),
+                    rs.getString("type_operation"),
+                    rs.getDouble("montant"),
+                    rs.getTimestamp("date_operation"),
+                    (Integer) rs.getObject("compte_source"),
+                    (Integer) rs.getObject("compte_destination"),
+                    rs.getString("marchand")
+                ));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching all operations: " + e.getMessage());
+        }
+        return operations;
+    }
 }

@@ -69,4 +69,30 @@ public class ClientDAO {
         }
         return null;
     }
+
+    public List<Client> searchClients(String keyword) {
+        List<Client> clients = new ArrayList<>();
+        String sql = "SELECT * FROM CLIENT WHERE nom LIKE ? OR prenom LIKE ? OR telephone LIKE ?";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            String searchPattern = "%" + keyword + "%";
+            pstmt.setString(1, searchPattern);
+            pstmt.setString(2, searchPattern);
+            pstmt.setString(3, searchPattern);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    clients.add(new Client(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("telephone"),
+                        rs.getString("adresse")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error searching clients: " + e.getMessage());
+        }
+        return clients;
+    }
 }
