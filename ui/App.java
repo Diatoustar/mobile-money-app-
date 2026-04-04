@@ -19,8 +19,7 @@ public class App {
             System.out.println("0. Quitter");
             System.out.print("Choix: ");
             
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            int choice = lireEntier();
 
             switch (choice) {
                 case 1: clientMenu(); break;
@@ -38,8 +37,7 @@ public class App {
         System.out.println("2. Lister les Clients");
         System.out.println("3. Rechercher des Clients");
         System.out.print("Choix: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+        int choice = lireEntier();
 
         if (choice == 1) {
             System.out.print("Nom: "); String nom = scanner.nextLine();
@@ -64,12 +62,11 @@ public class App {
         System.out.println("1. Créer un Compte");
         System.out.println("2. Consulter le Solde");
         System.out.print("Choix: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+        int choice = lireEntier();
 
         if (choice == 1) {
             System.out.print("Numéro de compte: "); String num = scanner.nextLine();
-            System.out.print("ID Client: "); int clientId = scanner.nextInt();
+            System.out.print("ID Client: "); int clientId = lireEntier();
             service.createAccount(num, clientId);
             System.out.println("Compte créé !");
         } else if (choice == 2) {
@@ -89,13 +86,11 @@ public class App {
         System.out.println("5. Historique (Global)");
         System.out.println("6. Historique (Par Compte)");
         System.out.print("Choix: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+        int choice = lireEntier();
 
         if (choice >= 1 && choice <= 4) {
             System.out.print("Numéro de compte: "); String num = scanner.nextLine();
-            System.out.print("Montant: "); double montant = scanner.nextDouble();
-            scanner.nextLine();
+            System.out.print("Montant: "); double montant = lireDouble();
 
             boolean success = false;
             switch (choice) {
@@ -123,6 +118,26 @@ public class App {
                 for (Operation o : history) System.out.println(o);
             } else {
                 System.out.println("Compte inexistant.");
+            }
+        }
+    }
+
+    private static int lireEntier() {
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.print("Entrée invalide. Veuillez saisir un nombre entier : ");
+            }
+        }
+    }
+
+    private static double lireDouble() {
+        while (true) {
+            try {
+                return Double.parseDouble(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.print("Entrée invalide. Veuillez saisir un montant valide (ex: 1000.50) : ");
             }
         }
     }
