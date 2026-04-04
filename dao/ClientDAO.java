@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientDAO {
-    public void addClient(Client client) {
+    public boolean addClient(Client client) {
         String sql = "INSERT INTO CLIENT (nom, prenom, telephone, adresse) VALUES (?, ?, ?, ?)";
         try (Connection conn = Database.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -22,8 +22,10 @@ public class ClientDAO {
                     client.setId(generatedKeys.getInt(1));
                 }
             }
+            return true;
         } catch (SQLException e) {
             System.err.println("Error adding client: " + e.getMessage());
+            return false;
         }
     }
 

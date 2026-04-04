@@ -36,16 +36,22 @@ public class App {
         System.out.println("1. Ajouter un Client");
         System.out.println("2. Lister les Clients");
         System.out.println("3. Rechercher des Clients");
+        System.out.println("0. Retour");
         System.out.print("Choix: ");
         int choice = lireEntier();
+
+        if (choice == 0) return;
 
         if (choice == 1) {
             System.out.print("Nom: "); String nom = scanner.nextLine();
             System.out.print("Prénom: "); String prenom = scanner.nextLine();
             System.out.print("Téléphone: "); String tel = scanner.nextLine();
             System.out.print("Adresse: "); String adr = scanner.nextLine();
-            service.createClient(nom, prenom, tel, adr);
-            System.out.println("Client ajouté !");
+            if (service.createClient(nom, prenom, tel, adr)) {
+                System.out.println("Client ajouté avec succès !");
+            } else {
+                System.out.println("Erreur: Impossible d'ajouter le client. Veuillez vérifier les informations.");
+            }
         } else if (choice == 2) {
             List<Client> clients = service.getAllClients();
             for (Client c : clients) System.out.println(c);
@@ -61,14 +67,20 @@ public class App {
         System.out.println("\n--- GESTION DES COMPTES ---");
         System.out.println("1. Créer un Compte");
         System.out.println("2. Consulter le Solde");
+        System.out.println("0. Retour");
         System.out.print("Choix: ");
         int choice = lireEntier();
+
+        if (choice == 0) return;
 
         if (choice == 1) {
             System.out.print("Numéro de compte: "); String num = scanner.nextLine();
             System.out.print("ID Client: "); int clientId = lireEntier();
-            service.createAccount(num, clientId);
-            System.out.println("Compte créé !");
+            if (service.createAccount(num, clientId)) {
+                System.out.println("Compte créé avec succès !");
+            } else {
+                System.out.println("Erreur: Impossible de créer le compte. L'ID Client est introuvable ou le numéro de compte existe déjà.");
+            }
         } else if (choice == 2) {
             System.out.print("Numéro de compte: "); String num = scanner.nextLine();
             Double solde = service.getBalance(num);
@@ -85,8 +97,11 @@ public class App {
         System.out.println("4. Paiement Marchand");
         System.out.println("5. Historique (Global)");
         System.out.println("6. Historique (Par Compte)");
+        System.out.println("0. Retour");
         System.out.print("Choix: ");
         int choice = lireEntier();
+
+        if (choice == 0) return;
 
         if (choice >= 1 && choice <= 4) {
             System.out.print("Numéro de compte: "); String num = scanner.nextLine();
