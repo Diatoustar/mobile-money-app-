@@ -58,4 +58,13 @@ public class CompteDAO {
             System.err.println("Error updating balance: " + e.getMessage());
         }
     }
+
+    public void updateSolde(Connection conn, int id, double nouveauSolde) throws SQLException {
+        String sql = "UPDATE COMPTE SET solde = ? WHERE id = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setDouble(1, nouveauSolde);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+        }
+    }
 }

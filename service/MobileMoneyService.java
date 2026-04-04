@@ -74,18 +74,33 @@ public class MobileMoneyService {
             return false;
         }
         
-        source.setSolde(source.getSolde() - montant);
-        dest.setSolde(dest.getSolde() + montant);
-        
-        compteDAO.updateSolde(source.getId(), source.getSolde());
-        compteDAO.updateSolde(dest.getId(), dest.getSolde());
-        
-        Operation op = new Operation();
-        op.setTypeOperation("TRANSFERT");
-        op.setMontant(montant);
-        op.setCompteSource(source.getId());
-        op.setCompteDestination(dest.getId());
-        return operationDAO.addOperation(op);
+        try (java.sql.Connection conn = database.Database.getConnection()) {
+            conn.setAutoCommit(false);
+            try {
+                source.setSolde(source.getSolde() - montant);
+                dest.setSolde(dest.getSolde() + montant);
+                
+                compteDAO.updateSolde(conn, source.getId(), source.getSolde());
+                compteDAO.updateSolde(conn, dest.getId(), dest.getSolde());
+                
+                Operation op = new Operation();
+                op.setTypeOperation("TRANSFERT");
+                op.setMontant(montant);
+                op.setCompteSource(source.getId());
+                op.setCompteDestination(dest.getId());
+                operationDAO.addOperation(conn, op);
+                
+                conn.commit();
+                return true;
+            } catch (java.sql.SQLException e) {
+                conn.rollback();
+                System.err.println("Erreur de transaction : " + e.getMessage());
+                return false;
+            }
+        } catch (java.sql.SQLException e) {
+            System.err.println("Erreur de connexion : " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean payMerchant(String sourceNumero, String merchantName, double montant) {
