@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OperationDAO {
-    public void addOperation(Operation operation) {
+    public boolean addOperation(Operation operation) {
         String sql = "INSERT INTO OPERATIONS (type_operation, montant, compte_source, compte_destination, marchand) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = Database.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -29,8 +29,10 @@ public class OperationDAO {
                     operation.setId(generatedKeys.getInt(1));
                 }
             }
+            return true;
         } catch (SQLException e) {
             System.err.println("Error adding operation: " + e.getMessage());
+            return false;
         }
     }
 

@@ -13,18 +13,18 @@ public class MobileMoneyService {
     private CompteDAO compteDAO = new CompteDAO();
     private OperationDAO operationDAO = new OperationDAO();
 
-    public void createClient(String nom, String prenom, String telephone, String adresse) {
+    public boolean createClient(String nom, String prenom, String telephone, String adresse) {
         Client client = new Client(nom, prenom, telephone, adresse);
-        clientDAO.addClient(client);
+        return clientDAO.addClient(client);
     }
 
     public List<Client> getAllClients() {
         return clientDAO.getAllClients();
     }
 
-    public void createAccount(String numero, int clientId) {
+    public boolean createAccount(String numero, int clientId) {
         Compte compte = new Compte(numero, 0.0, clientId);
-        compteDAO.addCompte(compte);
+        return compteDAO.addCompte(compte);
     }
 
     public boolean deposit(String numeroCompte, double montant) {
@@ -37,8 +37,7 @@ public class MobileMoneyService {
             op.setTypeOperation("DEPOT");
             op.setMontant(montant);
             op.setCompteDestination(compte.getId());
-            operationDAO.addOperation(op);
-            return true;
+            return operationDAO.addOperation(op);
         }
         return false;
     }
@@ -53,8 +52,7 @@ public class MobileMoneyService {
             op.setTypeOperation("RETRAIT");
             op.setMontant(montant);
             op.setCompteSource(compte.getId());
-            operationDAO.addOperation(op);
-            return true;
+            return operationDAO.addOperation(op);
         }
         return false;
     }
@@ -63,22 +61,31 @@ public class MobileMoneyService {
         Compte source = compteDAO.getCompteByNumero(sourceNumero);
         Compte dest = compteDAO.getCompteByNumero(destNumero);
         
-        if (source != null && dest != null && source.getSolde() >= montant) {
-            source.setSolde(source.getSolde() - montant);
-            dest.setSolde(dest.getSolde() + montant);
-            
-            compteDAO.updateSolde(source.getId(), source.getSolde());
-            compteDAO.updateSolde(dest.getId(), dest.getSolde());
-            
-            Operation op = new Operation();
-            op.setTypeOperation("TRANSFERT");
-            op.setMontant(montant);
-            op.setCompteSource(source.getId());
-            op.setCompteDestination(dest.getId());
-            operationDAO.addOperation(op);
-            return true;
+        if (source == null) {
+            System.err.println("Compte source inexistant.");
+            return false;
         }
-        return false;
+        if (dest == null) {
+            System.err.println("Compte destinataire inexistant.");
+            return false;
+        }
+        if (source.getSolde() < montant) {
+            System.err.println("Solde insuffisant.");
+            return false;
+        }
+        
+        source.setSolde(source.getSolde() - montant);
+        dest.setSolde(dest.getSolde() + montant);
+        
+        compteDAO.updateSolde(source.getId(), source.getSolde());
+        compteDAO.updateSolde(dest.getId(), dest.getSolde());
+        
+        Operation op = new Operation();
+        op.setTypeOperation("TRANSFERT");
+        op.setMontant(montant);
+        op.setCompteSource(source.getId());
+        op.setCompteDestination(dest.getId());
+        return operationDAO.addOperation(op);
     }
 
     public boolean payMerchant(String sourceNumero, String merchantName, double montant) {
@@ -92,8 +99,7 @@ public class MobileMoneyService {
             op.setMontant(montant);
             op.setCompteSource(source.getId());
             op.setMarchand(merchantName);
-            operationDAO.addOperation(op);
-            return true;
+            return operationDAO.addOperation(op);
         }
         return false;
     }

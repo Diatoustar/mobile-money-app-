@@ -5,7 +5,7 @@ import model.Compte;
 import java.sql.*;
 
 public class CompteDAO {
-    public void addCompte(Compte compte) {
+    public boolean addCompte(Compte compte) {
         String sql = "INSERT INTO COMPTE (numero_compte, solde, client_id) VALUES (?, ?, ?)";
         try (Connection conn = Database.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -19,8 +19,10 @@ public class CompteDAO {
                     compte.setId(generatedKeys.getInt(1));
                 }
             }
+            return true;
         } catch (SQLException e) {
             System.err.println("Error adding account: " + e.getMessage());
+            return false;
         }
     }
 
