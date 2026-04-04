@@ -8,9 +8,17 @@ import java.util.List;
 
 public class OperationDAO {
     public boolean addOperation(Operation operation) {
+        try (Connection conn = Database.getConnection()) {
+            return addOperation(conn, operation);
+        } catch (SQLException e) {
+            System.err.println("Error adding operation: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean addOperation(Connection conn, Operation operation) throws SQLException {
         String sql = "INSERT INTO OPERATIONS (type_operation, montant, compte_source, compte_destination, marchand) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = Database.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, operation.getTypeOperation());
             pstmt.setDouble(2, operation.getMontant());
             
@@ -30,9 +38,6 @@ public class OperationDAO {
                 }
             }
             return true;
-        } catch (SQLException e) {
-            System.err.println("Error adding operation: " + e.getMessage());
-            return false;
         }
     }
 
