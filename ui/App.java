@@ -30,18 +30,18 @@ public class App {
 
         while (true) {
             clearScreen();
-            System.out.println(CYAN + BOLD + "╔════════════════════════════════════════╗" + RESET);
-            System.out.println(CYAN + BOLD + "║        " + YELLOW + "MOBILE MONEY SYSTEM PRO" + CYAN + "         ║" + RESET);
-            System.out.println(CYAN + BOLD + "╠════════════════════════════════════════╣" + RESET);
-            System.out.println(CYAN + BOLD + "║ " + YELLOW + "1. " + RESET + "Gérer les Clients                    " + CYAN + BOLD + "║" + RESET);
-            System.out.println(CYAN + BOLD + "║ " + YELLOW + "2. " + RESET + "Gérer les Comptes                    " + CYAN + BOLD + "║" + RESET);
-            System.out.println(CYAN + BOLD + "║ " + YELLOW + "3. " + RESET + "Gérer les Marchands                  " + CYAN + BOLD + "║" + RESET);
-            System.out.println(CYAN + BOLD + "║ " + YELLOW + "4. " + RESET + "Opérations Financières               " + CYAN + BOLD + "║" + RESET);
-            System.out.println(CYAN + BOLD + "║ " + YELLOW + "5. " + RESET + "Statistiques & Recherche Avancée     " + CYAN + BOLD + "║" + RESET);
-            System.out.println(CYAN + BOLD + "╠════════════════════════════════════════╣" + RESET);
-            System.out.println(CYAN + BOLD + "║ " + RED + "0. " + RESET + "Quitter                              " + CYAN + BOLD + "║" + RESET);
-            System.out.println(CYAN + BOLD + "╚════════════════════════════════════════╝" + RESET);
-            System.out.print(BOLD + "\n▶ Votre choix : " + RESET);
+            System.out.println(CYAN + BOLD + "=========================================" + RESET);
+            System.out.println(CYAN + BOLD + "         " + YELLOW + "MOBILE MONEY SYSTEM PRO" + CYAN + "         " + RESET);
+            System.out.println(CYAN + BOLD + "=========================================" + RESET);
+            System.out.println(CYAN + BOLD + "| " + YELLOW + "1. " + RESET + "Gérer les Clients                     " + CYAN + BOLD + "|" + RESET);
+            System.out.println(CYAN + BOLD + "| " + YELLOW + "2. " + RESET + "Gérer les Comptes                     " + CYAN + BOLD + "|" + RESET);
+            System.out.println(CYAN + BOLD + "| " + YELLOW + "3. " + RESET + "Gérer les Marchands                   " + CYAN + BOLD + "|" + RESET);
+            System.out.println(CYAN + BOLD + "| " + YELLOW + "4. " + RESET + "Opérations Financières                " + CYAN + BOLD + "|" + RESET);
+            System.out.println(CYAN + BOLD + "| " + YELLOW + "5. " + RESET + "Statistiques & Recherche Avancée      " + CYAN + BOLD + "|" + RESET);
+            System.out.println(CYAN + BOLD + "-----------------------------------------" + RESET);
+            System.out.println(CYAN + BOLD + "| " + RED + "0. " + RESET + "Quitter                               " + CYAN + BOLD + "|" + RESET);
+            System.out.println(CYAN + BOLD + "=========================================" + RESET);
+            System.out.print(BOLD + "\nVotre choix : " + RESET);
             
             int choice = lireEntier();
 
@@ -63,14 +63,14 @@ public class App {
 
     private static void clientMenu() {
         clearScreen();
-        System.out.println(CYAN + BOLD + "\n┌────────────────────────────────────────┐" + RESET);
-        System.out.println(CYAN + BOLD + "│          " + YELLOW + "GESTION DES CLIENTS" + CYAN + "           │" + RESET);
-        System.out.println(CYAN + BOLD + "└────────────────────────────────────────┘" + RESET);
+        System.out.println(CYAN + BOLD + "\n-----------------------------------------" + RESET);
+        System.out.println(CYAN + BOLD + "          " + YELLOW + "GESTION DES CLIENTS" + CYAN +           RESET);
+        System.out.println(CYAN + BOLD + "-----------------------------------------" + RESET);
         System.out.println("  1. Ajouter un Client");
         System.out.println("  2. Lister les Clients");
         System.out.println("  3. Rechercher des Clients");
         System.out.println("  0. Retour");
-        System.out.print("\n▶ Choix : ");
+        System.out.print("\nVotre choix : ");
         int choice = lireEntier();
 
         if (choice == 0) return;
@@ -101,13 +101,13 @@ public class App {
 
     private static void accountMenu() {
         clearScreen();
-        System.out.println(CYAN + BOLD + "\n┌────────────────────────────────────────┐" + RESET);
-        System.out.println(CYAN + BOLD + "│          " + YELLOW + "GESTION DES COMPTES" + CYAN + "           │" + RESET);
-        System.out.println(CYAN + BOLD + "└────────────────────────────────────────┘" + RESET);
+        System.out.println(CYAN + BOLD + "\n-----------------------------------------" + RESET);
+        System.out.println(CYAN + BOLD + "           " + YELLOW + "GESTION DES COMPTES" + CYAN +          RESET);
+        System.out.println(CYAN + BOLD + "-----------------------------------------" + RESET);
         System.out.println("  1. Créer un Compte");
         System.out.println("  2. Consulter le Solde");
         System.out.println("  0. Retour");
-        System.out.print("\n▶ Choix : ");
+        System.out.print("\nVotre choix : ");
         int choice = lireEntier();
 
         if (choice == 0) return;
@@ -131,13 +131,13 @@ public class App {
 
     private static void marchandMenu() {
         clearScreen();
-        System.out.println(CYAN + BOLD + "\n┌────────────────────────────────────────┐" + RESET);
-        System.out.println(CYAN + BOLD + "│         " + YELLOW + "GESTION DES MARCHANDS" + CYAN + "          │" + RESET);
-        System.out.println(CYAN + BOLD + "└────────────────────────────────────────┘" + RESET);
+        System.out.println(CYAN + BOLD + "\n-----------------------------------------" + RESET);
+        System.out.println(CYAN + BOLD + "          " + YELLOW + "GESTION DES MARCHANDS" + CYAN +          RESET);
+        System.out.println(CYAN + BOLD + "-----------------------------------------" + RESET);
         System.out.println("  1. Ajouter un Marchand");
         System.out.println("  2. Lister les Marchands");
         System.out.println("  0. Retour");
-        System.out.print("\n▶ Choix : ");
+        System.out.print("\nVotre choix : ");
         int choice = lireEntier();
 
         if (choice == 0) return;
@@ -162,15 +162,15 @@ public class App {
 
     private static void operationMenu() {
         clearScreen();
-        System.out.println(CYAN + BOLD + "\n┌────────────────────────────────────────┐" + RESET);
-        System.out.println(CYAN + BOLD + "│         " + YELLOW + "OPERATIONS FINANCIERES" + CYAN + "         │" + RESET);
-        System.out.println(CYAN + BOLD + "└────────────────────────────────────────┘" + RESET);
+        System.out.println(CYAN + BOLD + "\n-----------------------------------------" + RESET);
+        System.out.println(CYAN + BOLD + "         " + YELLOW + "OPERATIONS FINANCIERES" + CYAN +          RESET);
+        System.out.println(CYAN + BOLD + "-----------------------------------------" + RESET);
         System.out.println("  1. Dépôt");
         System.out.println("  2. Retrait");
         System.out.println("  3. Transfert");
         System.out.println("  4. Paiement Marchand");
         System.out.println("  0. Retour");
-        System.out.print("\n▶ Choix : ");
+        System.out.print("\nVotre choix : ");
         int choice = lireEntier();
 
         if (choice == 0) return;
@@ -201,15 +201,15 @@ public class App {
 
     private static void statsMenu() {
         clearScreen();
-        System.out.println(CYAN + BOLD + "\n┌────────────────────────────────────────┐" + RESET);
-        System.out.println(CYAN + BOLD + "│       " + YELLOW + "STATISTIQUES ET RECHERCHE" + CYAN + "        │" + RESET);
-        System.out.println(CYAN + BOLD + "└────────────────────────────────────────┘" + RESET);
+        System.out.println(CYAN + BOLD + "\n-----------------------------------------" + RESET);
+        System.out.println(CYAN + BOLD + "        " + YELLOW + "STATISTIQUES ET RECHERCHE" + CYAN +         RESET);
+        System.out.println(CYAN + BOLD + "-----------------------------------------" + RESET);
         System.out.println("  1. Statistiques Globales");
         System.out.println("  2. Historique Complet");
         System.out.println("  3. Historique d'un Compte");
         System.out.println("  4. Recherche par Plage de Dates");
         System.out.println("  0. Retour");
-        System.out.print("\n▶ Choix : ");
+        System.out.print("\nVotre choix : ");
         int choice = lireEntier();
 
         if (choice == 0) return;

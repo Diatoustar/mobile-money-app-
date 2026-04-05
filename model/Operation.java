@@ -47,6 +47,20 @@ public class Operation {
 
     @Override
     public String toString() {
-        return "Operation [id=" + id + ", type=" + typeOperation + ", montant=" + montant + ", date=" + dateOperation + "]";
+        String details = "";
+        if ("TRANSFERT".equals(typeOperation)) {
+            details = "(Cpte " + compteSource + " -> Cpte " + compteDestination + ")";
+        } else if ("PAIEMENT".equals(typeOperation)) {
+            details = "(Chez " + marchand + ")";
+        } else if ("DEPOT".equals(typeOperation)) {
+            details = "(Cpte " + compteDestination + ")";
+        } else if ("RETRAIT".equals(typeOperation)) {
+            details = "(Cpte " + compteSource + ")";
+        }
+        
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String dateStr = (dateOperation != null) ? sdf.format(dateOperation) : "Inconnue";
+        
+        return String.format("[%s] %-10s | %8.2f FCFA %s", dateStr, typeOperation, montant, details);
     }
 }
