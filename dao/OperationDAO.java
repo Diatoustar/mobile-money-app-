@@ -89,4 +89,52 @@ public class OperationDAO {
         }
         return operations;
     }
+
+    public List<Operation> getOperationsByDateRange(Timestamp debut, Timestamp fin) {
+        List<Operation> operations = new ArrayList<>();
+        String sql = "SELECT * FROM OPERATIONS WHERE date_operation BETWEEN ? AND ? ORDER BY date_operation DESC";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setTimestamp(1, debut);
+            pstmt.setTimestamp(2, fin);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    operations.add(new Operation(
+                        rs.getInt("id"),
+                        rs.getString("type_operation"),
+                        rs.getDouble("montant"),
+                        rs.getTimestamp("date_operation"),
+                        (Integer) rs.getObject("compte_source"),
+                        (Integer) rs.getObject("compte_destination"),
+                        rs.getString("marchand")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur de recherche par date : " + e.getMessage());
+        }
+        return operations;
+    }
+
+    public void printStatistics() {
+        String sql = "SELECT type_operation, COUNT(*) as nb, SUM(montant) as total FROM OPERATIONS GROUP BY type_operation";
+        try (Connection conn = Database.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            System.out.println("\n--- STATISTIQUES DES TRANSACTIONS ---");
+            boolean hasStats = false;
+            while (rs.next()) {
+                hasStats = true;
+                String type = rs.getString("type_operation");
+                int nb = rs.getInt("nb");
+                double total = rs.getDouble("total");
+                System.out.printf("- %s: %d opérations, Total: %.2f FCFA%n", type, nb, total);
+            }
+            if (!hasStats) {
+                System.out.println("Aucune opération n'a été effectuée pour le moment.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur génération statistiques : " + e.getMessage());
+        }
+    }
 }

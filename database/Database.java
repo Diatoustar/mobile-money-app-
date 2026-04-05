@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import java.sql.Statement;
+
 public class Database {
     private static final String URL = "jdbc:mysql://localhost:3306/mobilemoney_db";
     private static final String USER = "root";
@@ -24,6 +26,21 @@ public class Database {
         } catch (SQLException e) {
             System.err.println("Connection failed: " + e.getMessage());
             throw new RuntimeException("Échec de connexion à la base de données. Assurez-vous que MySQL/XAMPP est démarré.", e);
+        }
+    }
+
+    public static void initDatabase() {
+        String sqlMarchand = "CREATE TABLE IF NOT EXISTS MARCHAND (" +
+                "id INT AUTO_INCREMENT PRIMARY KEY," +
+                "nom VARCHAR(100) NOT NULL," +
+                "compte_recepteur VARCHAR(50) NOT NULL," +
+                "type_commerce VARCHAR(100)" +
+                ")";
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sqlMarchand);
+        } catch (SQLException e) {
+            System.err.println("Erreur d'initialisation de la base : " + e.getMessage());
         }
     }
 
