@@ -30,14 +30,14 @@ public class Database {
     }
 
     public static void initDatabase() {
-        String sqlMarchand = "CREATE TABLE IF NOT EXISTS MARCHAND (" +
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement()) {
+            String sqlMarchand = "CREATE TABLE IF NOT EXISTS MARCHAND (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY," +
                 "nom VARCHAR(100) NOT NULL," +
                 "compte_recepteur VARCHAR(50) NOT NULL," +
                 "type_commerce VARCHAR(100)" +
                 ")";
-        try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement()) {
             stmt.execute(sqlMarchand);
         } catch (SQLException e) {
             System.err.println("Erreur d'initialisation de la base : " + e.getMessage());
