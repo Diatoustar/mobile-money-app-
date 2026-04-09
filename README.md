@@ -1,64 +1,48 @@
 # Mobile Money System - Java Console Application
 
 ## Présentation du Projet
-Cette application console développée en **Java** permet de simuler un système de **Mobile Money** complet. Ce projet est réalisé dans le cadre de notre formation en **DUT2 Informatique** à l'École Supérieure Polytechnique (**ESP**).
+Cette application console développée en **Java** simule un système de **Mobile Money** complet (inspiré de services comme Wave ou Orange Money). Ce projet est réalisé dans le cadre de notre formation en **DUT2 Informatique** à l'École Supérieure Polytechnique (**ESP/UCAD**).
 
-L'objectif principal est de gérer des clients, des comptes et de sécuriser des opérations financières via une base de données **MySQL**.
+L'objectif est de garantir la sécurité des transactions et la persistance des données via une architecture robuste.
 
 ---
 
 ## Fonctionnalités Principales
 
-### Gestion des Clients
-* Ajout de nouveaux clients avec informations personnelles (Nom, Prénom, Téléphone, Adresse).
-* Affichage de la liste complète des clients enregistrés.
-* Recherche multicritère de clients.
+### Gestion des Clients & Marchands
+* Création et gestion des profils clients (Nom, Téléphone, Adresse).
+* Gestion des **Marchands** pour les paiements de services.
 
 ### Gestion des Comptes
-* Création de comptes Mobile Money associés à un client.
-* Consultation du solde en temps réel.
+* Création de comptes associés de manière unique à un client.
+* Consultation du solde en temps réel avec formatage monétaire (FCFA).
 
-### Opérations Financières
-* **Dépôt** : Alimentation d'un compte spécifique.
-* **Retrait** : Retrait d'argent sous condition de solde suffisant.
-* **Transfert** : Envoi d'argent de compte à compte.
-* **Paiement Marchand** : Règlement de services auprès de commerçants.
-* **Historique** : Consultation globale ou détaillée par compte de toutes les transactions.
+### Opérations Financières & Analyse
+* **Transactions** : Dépôt, Retrait, Transfert sécurisé et Paiement Marchand.
+* **Sécurité** : Gestion de l'atomicité des transferts (Transactions SQL).
+* **Historique** : Consultation détaillée des mouvements par compte.
+* **Statistiques** : Analyse globale du volume des transactions et recherche par plage de dates.
 
 ---
-## Structure du projet
-PROJET_JAVA/
-├── dao/
-│   ├── ClientDAO.java 
-│   ├── CompteDAO.java 
-│   └── OperationDAO.java 
-├── database/ 
-│   └── Database.java
-├── model/
-│   ├── Client.java 
-│   ├── Compte.java 
-│   └── Operation.java 
-├── service/ 
-│   └── MobileMoneyService.java
-└── ui/ 
-    └── App.java 
+
+## Structure du Projet (Architecture N-Tiers)
+Le projet respecte une séparation stricte des responsabilités :
+- `model` : Objets métier (Client, Compte, Operation).
+- `dao` : Data Access Objects pour les requêtes SQL.
+- `service` : Logique métier et sécurisation des échanges.
+- `database` : Singleton de connexion JDBC.
+- `ui` : Interface utilisateur console interactive (codes couleurs ANSI).
+
+---
 
 ## Spécifications Techniques
-* **Langage** : Java.
-* **Paradigme** : Programmation Orientée Objet (POO) avec encapsulation et gestion des exceptions.
-* **Base de données** : MySQL (nommée `mobile_money_db`).
-* **Persistance** : Connexion via **JDBC**.
-* **Architecture** : Séparation en couches:
-    * `model` : Entités (Client, Compte, Operation).
-    * `dao` : Accès aux données (Data Access Object).
-    * `service` : Logique métier.
-    * `database` : Gestion de la connexion JDBC.
-    * `ui` : Interface utilisateur console.
+* **Langage** : Java (POO).
+* **Base de données** : MySQL (`mobilemoney_db`).
+* **Connecteur** : JDBC (mysql-connector-j).
+* **Outil de modélisation** : StarUML (Diagramme de classe).
 
 ---
 
 ## Équipe de Développement
 * **Khadidiatou GAYE**
 * **Josias ADINSI**
-
->
