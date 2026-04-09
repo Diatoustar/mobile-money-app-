@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS OPERATIONS (
     CONSTRAINT fk_compte FOREIGN KEY (compte_id) REFERENCES COMPTE(id) ON DELETE CASCADE
 );
 
-//Ajout des colonnes pour les opérations de transfert
+--Ajout des colonnes pour les opérations de transfert
 ALTER TABLE OPERATIONS ADD COLUMN compte_source INT;
 ALTER TABLE OPERATIONS ADD COLUMN compte_destination INT;
 ALTER TABLE OPERATIONS DROP FOREIGN KEY fk_compte;
