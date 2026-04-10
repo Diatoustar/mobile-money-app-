@@ -43,6 +43,22 @@ Le projet respecte une séparation stricte des responsabilités :
 
 ---
 
+## Compilation du Projet
+Ouvrez un terminal à la racine du dossier PROJETJAVA et exécutez la commande suivante :
+
+```bash
+javac -d . -cp ".;lib/*" dao/*.java database/*.java model/*.java service/*.java ui/*.java
+```
+---
+
+## Exécution de l'Application
+Une fois compilé, lancez le programme avec cette commande :
+```bash
+java -cp ".;lib/*" ui.App
+```
+
+---
+
 ## Équipe de Développement
 * **Khadidiatou GAYE**
 * **Josias ADINSI**
