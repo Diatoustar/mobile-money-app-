@@ -6,11 +6,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data Access Object (DAO) pour la gestion des clients.
+ * Gère les opérations de création, lecture et recherche des clients dans la base de données.
+ */
 public class ClientDAO {
     public boolean addClient(Client client) {
         String sql = "INSERT INTO CLIENT (nom, prenom, telephone, adresse) VALUES (?, ?, ?, ?)";
         try (Connection conn = Database.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, client.getNom());
             pstmt.setString(2, client.getPrenom());
             pstmt.setString(3, client.getTelephone());

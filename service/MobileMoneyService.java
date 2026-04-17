@@ -11,6 +11,7 @@ import model.Operation;
 import java.sql.Timestamp;
 import java.util.List;
 
+// Gère la logique des opérations bancaires (dépôt, retrait, transfert, paiement marchand).
 public class MobileMoneyService {
     private ClientDAO clientDAO = new ClientDAO();
     private CompteDAO compteDAO = new CompteDAO();

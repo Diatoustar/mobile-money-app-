@@ -6,6 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//Data Access Object (DAO) pour la gestion des opérations financières.
+//Gère l'historique des transactions (dépôts, retraits, transferts, paiements) et les statistiques.
+
 public class OperationDAO {
     public boolean addOperation(Operation operation) {
         try (Connection conn = Database.getConnection()) {

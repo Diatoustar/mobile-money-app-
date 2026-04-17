@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import java.sql.Statement;
 
+//Classe utilitaire pour la gestion de la connexion à la base de données.
+Fournit des méthodes pour se connecter, initialiser les tables et fermer la connexion.
 public class Database {
     private static final String URL = "jdbc:mysql://localhost:3306/mobilemoney_db";
     private static final String USER = "root";
@@ -13,7 +15,6 @@ public class Database {
 
     public static Connection getConnection() {
         try {
-            // Load MySQL JDBC Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException e) {
@@ -31,7 +32,7 @@ public class Database {
 
     public static void initDatabase() {
         try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement()) {
+            Statement stmt = conn.createStatement()) {
             String sqlMarchand = "CREATE TABLE IF NOT EXISTS MARCHAND (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY," +
                 "nom VARCHAR(100) NOT NULL," +

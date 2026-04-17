@@ -1,5 +1,7 @@
 package model;
 
+//Contient le numéro de compte, le solde actuel et l'identifiant du client propriétaire.
+
 public class Compte {
     private int id;
     private String numeroCompte;

@@ -6,6 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//Data Access Object (DAO) pour la gestion des marchands.Permet l'enregistrement et la récupération des informations des marchands.
+
 public class MarchandDAO {
     
     public boolean addMarchand(Marchand marchand) {

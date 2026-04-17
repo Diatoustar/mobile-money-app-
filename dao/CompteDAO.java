@@ -4,6 +4,8 @@ import database.Database;
 import model.Compte;
 import java.sql.*;
 
+//Gère l'ajout de comptes et la mise à jour des soldes dans la base de données.
+
 public class CompteDAO {
     public boolean addCompte(Compte compte) {
         String sql = "INSERT INTO COMPTE (numero_compte, solde, client_id) VALUES (?, ?, ?)";

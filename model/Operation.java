@@ -2,12 +2,14 @@ package model;
 
 import java.sql.Timestamp;
 
+// Modèle représentant une opération financière (transaction).
+Détaille le type, le montant, la date, les comptes impliqués et optionnellement le marchand.
 public class Operation {
     private int id;
     private String typeOperation;
     private double montant;
     private Timestamp dateOperation;
-    private Integer compteSource; // Using Integer to allow null
+    private Integer compteSource; 
     private Integer compteDestination;
     private String marchand;
 

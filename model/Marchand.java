@@ -1,5 +1,7 @@
 package model;
 
+//Contient les informations de l'entreprise et son compte récepteur pour les paiements.
+
 public class Marchand {
     private int id;
     private String nom;

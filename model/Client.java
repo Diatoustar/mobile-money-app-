@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * Modèle représentant un client du système Mobile Money.
+ * Contient les informations personnelles du client (nom, téléphone, adresse).
+ */
 public class Client {
     private int id;
     private String nom;
