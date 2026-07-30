@@ -52,7 +52,7 @@ javac -d . -cp ".;lib/*" dao/*.java database/*.java model/*.java service/*.java 
 ---
 
 ## Exécution de l'Application
-Une fois compilé, lancez le programme avec cette commande :
+Une fois compilé, vous pourrez lancer le programme avec cette commande :
 ```bash
 java -cp ".;lib/*" ui.App
 ```
